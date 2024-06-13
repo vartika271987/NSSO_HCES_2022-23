@@ -79,21 +79,23 @@ data_frames <- future_map(levels, read_fwf_level)
 plan(sequential)
 
 #######
+#######
 
+#Option 2: 
 # Alternatively, Process it sequentially
 # Use this method if there is a RAM constraint
 # Process each level sequentially and store the data frames in a list
 data_frames <- lapply(levels, function(level) {
   read_fwf_level(level)
 })
+#######
+
+##Once the data frames are created through either of the above method, run these lines. 
 
 # Assign the data frames to the global environment with dynamic names
 for (i in seq_along(levels)) {
   assign(paste0("level_", levels[i]), data_frames[[i]], envir = .GlobalEnv)
 }
-
-
-#######
 
 # Loop to save data frames
 
